@@ -1,28 +1,40 @@
 <template>
   <div id="app">
-    <img alt="Vue logo" src="./assets/logo.png">
-    <HelloWorld msg="Welcome to Your Vue.js App"/>
+
+  <el-button @click="drawer = true" type="primary" style="margin-left: 16px;">
+    AI採寸
+  </el-button>
+
+  <el-drawer
+    title="AI採寸"
+    :visible.sync="drawer"
+    :direction="rtl"
+    :before-close="handleClose">
+    <iframe src="https://aobabd.wordpress.com/" frameborder="0" width="100%" height="600px"></iframe>
+  </el-drawer>
   </div>
 </template>
 
 <script>
-import HelloWorld from './components/HelloWorld.vue'
-
-export default {
-  name: 'App',
-  components: {
-    HelloWorld
-  }
-}
+  export default {
+    data() {
+      return {
+        drawer: false,
+        direction: 'rtl',
+      };
+    },
+    methods: {
+      handleClose(done) {
+        this.$confirm('确认关闭？')
+        // eslint-disable-next-line
+          .then(_ => {
+            done();
+          })
+          // eslint-disable-next-line
+          .catch(_ => {});
+      }
+    }
+  };
 </script>
 
-<style>
-#app {
-  font-family: Avenir, Helvetica, Arial, sans-serif;
-  -webkit-font-smoothing: antialiased;
-  -moz-osx-font-smoothing: grayscale;
-  text-align: center;
-  color: #2c3e50;
-  margin-top: 60px;
-}
-</style>
+
